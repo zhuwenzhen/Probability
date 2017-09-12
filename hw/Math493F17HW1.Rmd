@@ -1,0 +1,80 @@
+---
+title: "Math 493 Homework 1"
+output: html_notebook
+---
+
+### Creating Vectors and Matrices
+
+```{r}
+# Assign to the symbol A the 3-by-5 matrix with entries 0.
+A = matrix(0,3,5)
+# Assign value 1 to the 2nd row, 4th column element of A
+A[2,4] = 1
+#Assign value 2 to all entries of 5th column of A
+A[,5]=2
+```
+
+### Set Operations
+
+A finite set is a distinct object from a vector in that the elements are assumed to be distinct and the order of the elements in immaterial. 
+
+```{r}
+# Given two sequences: 
+a = c(1, 2, 3, 4, 3, 0, 0, 5, -1)
+b = c(4, 3, 2, 7, 7, 0, 1)
+
+# Let the respective sets of elements be
+A = unique(a)
+B = unique(b)
+
+# The intersection of A and B is
+intersect(a,b)
+# The union of the two sets is
+union(a, b)
+# The set of elements of A not in B is given by 
+setdiff(a, b)
+```
+
+
+### Simple Programming
+Computer programs require conditional statements and loops. A few examples are given
+here. It is most convenient to write your program as a separate text that you can edit before running. R has its
+own script editor. You may run your finished script simply by pasting the text to the R command line window.
+(You can also run the script from the editor window by highlighting the part of the script you wish to run and
+then clicking on the button ‘run’ at the top of the window.)
+Monte Carlo simulations typically involve repeating a random experiment many times. The ‘for loop’ is particularly
+useful in this case as you can see in the following experiment: We generate 10000 2-by-2 matrices with
+random elements in the range [−1, 1] (with the uniform probability distribution.) We then wish to find the mean
+value of the determinant.
+
+```{r}
+# number of random matrices
+n = 1000
+# keep track of the sum of determinant
+# at each step of the for loop
+total = 0
+for (i in 1:n) {
+  # the main part of the experiment to be repeated is here:
+  matrix_elements = runif(4, min=-1, max=1)
+  # assemble the matrix using these four random numbers:
+  random_matrix = matrix(matrix_elements, nrow=2, byrow=TRUE)
+  # add the matrix's determinant to total
+  total = total + det(random_matrix)
+}
+meanVal = total/n
+```
+
+```{r}
+N=50000
+numbers=c(1:50) 
+count = 0
+for (i in 1:N){
+  a = sample(numbers,5,replace=FALSE) 
+  if(is.element(1,a) || is.element(2,a) ){
+    count = count + 1
+  }
+}
+output = count / N
+
+```
+
